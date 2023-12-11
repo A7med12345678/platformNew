@@ -1,0 +1,20 @@
+   <div class="switch m-4">
+                @php
+                    $avlialble = json_decode(Auth::user()->avilable_grades);
+                @endphp
+
+                <form action="{{ route('studentSwithcourse') }}" method="post" id="courseForm">
+                    @csrf
+                    <select class="form-control" id="update_grade" name="update_grade">
+                        @foreach ($avlialble as $grade)
+                        <option value="{{ $grade }}" @if($grade == Auth::user()->grade) selected @endif>Course {{ $grade }}</option>
+                        @endforeach
+                    </select>
+                </form>
+
+                <script>
+                    // Add a JavaScript function to submit the form when the select value changes
+                    document.getElementById('update_grade').addEventListener('change', function() {
+                        document.getElementById('courseForm').submit();
+                    });
+                </script>

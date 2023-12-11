@@ -1,0 +1,40 @@
+.live-button {
+    margin-right: 0px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+
+.live-button.live {
+    -webkit-animation: livePulse 2s 250ms ease-in-out infinite backwards;
+    animation: livePulse 2s 250ms ease-in-out infinite backwards;
+    background-color: #d55548;
+}
+
+@keyframes livePulse {
+
+    0% {
+        color: rgba(255, 255, 255, 0.3);
+        text-shadow: none;
+    }
+
+    60% {
+        background-color: #d55548;
+        color: white;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+    }
+
+    70% {
+        background-color: #d55548;
+        color: white;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+    }
+
+    100% {
+        color: rgba(255, 255, 255, 0.3);
+        text-shadow: none;
+    }
+}
+

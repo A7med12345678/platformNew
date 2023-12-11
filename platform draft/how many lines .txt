@@ -1,0 +1,1 @@
+Get-ChildItem -File -Recurse -Include *.php | Get-Content | Measure-Object -Line

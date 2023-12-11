@@ -1,0 +1,43 @@
+#timer-container {
+  width: 80px; /* Adjust the width as needed */
+  text-align: center;
+}
+
+.remaining-text {
+  flex-shrink: 0;
+}
+
+.container-cus {
+    display: flex;
+    flex-wrap: wrap;
+    /* added */
+    align-items: flex-start;
+    /* added */
+}
+
+.photo-section {
+    width: 75%;
+    overflow-y: scroll;
+    /* added */
+}
+
+.form-section {
+    width: 25%;
+    transform: scale(0.85);
+}
+
+.radio-btn {
+    transform: scale(2);
+}
+
+@media (max-width: 767px) {
+    .photo-section {
+        width: 100%;
+    }
+
+    .form-section {
+        width: 100%;
+    }
+
+
+}

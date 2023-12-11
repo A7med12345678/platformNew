@@ -1,0 +1,14 @@
+.hidden {
+    display: none;
+}
+
+.items-center {
+    margin-bottom: 5%;
+    border-radius: 30px;
+}
+
+svg {
+    width: 50px !important;
+    height: 50px !important;
+    padding-top: 35px !important;
+}

@@ -1,0 +1,52 @@
+/* Custom CSS to align the navigation links to the right */
+.navbar-nav {
+	margin-left: auto;
+}
+
+.navbar {
+	padding: 15px 10px 15px 0px;
+	background-color: #28a7e9;
+	transition: all ease 1.4s;
+	border: none;
+	color: white !important;
+}
+
+.navbar-collapse {
+	margin-right: 10% !important;
+}
+
+.navbar-brand {
+	margin-left: 10% !important;
+}
+
+.nav-item {
+	font-weight: bold;
+	font-family: roboto;
+}
+
+.nav-link:hover {
+
+	/* color: #da3807 !important; */
+	border-bottom: #fff 2px solid;
+}
+
+
+
+/* content flex - gird :  */
+
+.grid-xl-2-sm-1 {
+	display: grid !important;
+	gap: 2em !important;
+	grid-template-columns: repeat(2, 1fr) !important;
+}
+
+@media (max-width: 768px) {
+	.grid-xl-2-sm-1 {
+		grid-template-columns: repeat(1, 1fr) !important;
+	}
+
+	.navbar-brand-div {
+		transform: scale(0.7);
+		/*padding-top:5px;*/
+	}
+}

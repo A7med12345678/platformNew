@@ -1,0 +1,57 @@
+{
+  "week1sec3": [
+    {
+      "question": "what is water",
+      "a": "H2O",
+      "b": "H2O",
+      "c": "H3O",
+      "d": "H4O",
+      "answer": "b"
+    },
+    {
+      "question": "what is water2",
+      "a": "H2O",
+      "b": "H1O",
+      "c": "H3O",
+      "d": "H4O",
+      "answer": "b"
+    }
+  ],
+  "week2sec3": [
+    {
+      "question": "what is water3",
+      "a": "H1O",
+      "b": "H2O",
+      "c": "H3O",
+      "d": "H4O",
+      "answer": "b"
+    },
+    {
+      "question": "what is water4",
+      "a": "H2O",
+      "b": "H1O",
+      "c": "H3O",
+      "d": "H4O",
+      "answer": "a"
+    }
+  ],
+  "week3sec3": [
+    {
+      "question": "whnnat is water3",
+      "a": "H1O",
+      "b": "H2O",
+      "c": "H3O",
+      "d": "H4O",
+      "answer": "b"
+    },
+    {
+      "question": "what is water4",
+      "a": "H2O",
+      "b": "H1O",
+      "c": "H3O",
+      "d": "H4O",
+      "answer": "a"
+    }
+  ]
+
+}

@@ -1,0 +1,4 @@
+multi courses
+
+
+        "niklasravnsborg/laravel-pdf": "^4.1",

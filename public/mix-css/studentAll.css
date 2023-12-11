@@ -1,0 +1,234 @@
+.week-content {
+    display: none;
+}
+
+.sec-content {
+    display: none;
+}
+    .grid-xl-2-sm-1 {
+    display: grid !important;
+    gap: 2em !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+}
+    @media (max-width: 768px) {
+         .grid-xl-2-sm-1 {
+        grid-template-columns: repeat(1, 1fr) !important;
+    }
+
+        .navbar-brand-div{
+            transform:scale(0.7);
+            /*padding-top:5px;*/
+        }
+    }
+
+.live-button {
+    margin-right: 0px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+
+.live-button.live {
+    -webkit-animation: livePulse 2s 250ms ease-in-out infinite backwards;
+    animation: livePulse 2s 250ms ease-in-out infinite backwards;
+    background-color: #d55548;
+}
+
+@keyframes livePulse {
+
+    0% {
+        color: rgba(255, 255, 255, 0.3);
+        text-shadow: none;
+    }
+
+    60% {
+        background-color: #d55548;
+        color: white;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+    }
+
+    70% {
+        background-color: #d55548;
+        color: white;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+    }
+
+    100% {
+        color: rgba(255, 255, 255, 0.3);
+        text-shadow: none;
+    }
+}
+
+
+/* Custom CSS to align the navigation links to the right */
+.navbar-nav {
+	margin-left: auto;
+}
+
+.navbar {
+	padding: 15px 10px 15px 0px;
+	background-color: #28a7e9;
+	transition: all ease 1.4s;
+	border: none;
+	color: white !important;
+}
+
+.navbar-collapse {
+	margin-right: 10% !important;
+}
+
+.navbar-brand {
+	margin-left: 10% !important;
+}
+
+.nav-item {
+	font-weight: bold;
+	font-family: roboto;
+}
+
+.nav-link:hover {
+
+	/* color: #da3807 !important; */
+	border-bottom: #fff 2px solid;
+}
+
+
+
+/* content flex - gird :  */
+
+.grid-xl-2-sm-1 {
+	display: grid !important;
+	gap: 2em !important;
+	grid-template-columns: repeat(2, 1fr) !important;
+}
+
+@media (max-width: 768px) {
+	.grid-xl-2-sm-1 {
+		grid-template-columns: repeat(1, 1fr) !important;
+	}
+
+	.navbar-brand-div {
+		transform: scale(0.7);
+		/*padding-top:5px;*/
+	}
+}
+.navbar-logo {
+    margin-left: 10%;
+}
+
+#navbarSupportedContent {
+    margin-left: 25%;
+}
+
+    .avatar-upload {
+        position: relative;
+        max-width: 205px;
+        margin: 50px auto;
+    }
+
+    .avatar-upload .avatar-edit {
+        position: absolute;
+        right: 12px;
+        z-index: 1;
+        top: 10px;
+    }
+
+    .avatar-upload .avatar-edit input {
+        display: none;
+    }
+
+    .avatar-upload .avatar-edit input+label {
+        display: inline-block;
+        width: 34px;
+        height: 34px;
+        margin-bottom: 0;
+        border-radius: 100%;
+        background: rgb(201, 196, 196);
+        border: 1px solid transparent;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+        cursor: pointer;
+        font-weight: normal;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .avatar-upload .avatar-edit input+label:hover {
+        background: #f1f1f1;
+        border-color: #d6d6d6;
+    }
+
+    .avatar-upload .avatar-edit input+label:after {
+        content: "\f040";
+        font-family: 'FontAwesome';
+        color: #757575;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        margin: auto;
+    }
+
+    .avatar-upload .avatar-preview {
+        width: 192px;
+        height: 192px;
+        position: relative;
+        border-radius: 100%;
+        border: 6px solid #F8F8F8;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .avatar-upload .avatar-preview>div {
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+
+#timer-container {
+  width: 80px; /* Adjust the width as needed */
+  text-align: center;
+}
+
+.remaining-text {
+  flex-shrink: 0;
+}
+
+.container-cus {
+    display: flex;
+    flex-wrap: wrap;
+    /* added */
+    align-items: flex-start;
+    /* added */
+}
+
+.photo-section {
+    width: 75%;
+    overflow-y: scroll;
+    /* added */
+}
+
+.form-section {
+    width: 25%;
+    transform: scale(0.85);
+}
+
+.radio-btn {
+    transform: scale(2);
+}
+
+@media (max-width: 767px) {
+    .photo-section {
+        width: 100%;
+    }
+
+    .form-section {
+        width: 100%;
+    }
+
+
+}

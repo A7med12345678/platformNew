@@ -1,0 +1,133 @@
+    @keyframes electronAnimation {
+  0% {
+    transform: rotateZ(0deg) translateX(20px) rotateZ(0deg) rotateY(-65deg);
+  }
+  100% {
+    transform: rotateZ(360deg) translateX(20px) rotateZ(-360deg) rotateY(-65deg);
+  }
+}
+
+@keyframes orbitSpecial {
+  0% {
+    border: 0;
+            border-top: 0.5px solid rgba(13, 71, 161, 0.5); /* Darker blue color */
+            border-bottom: 0.5px solid rgba(13, 71, 161, 0.5); /* Darker blue color */
+  }
+  35% {
+    border: 0;
+            border-top: 0.5px solid rgba(13, 71, 161, 0.5); /* Darker blue color */
+                        border-bottom: 0.5px solid rgba(13, 71, 161, 0.5); /* Darker blue color */
+
+  }
+  70% {
+    border: 0;
+            border-top: 0.5px solid rgba(13, 71, 161, 0.5); /* Darker blue color */
+                        border-bottom: 0.5px solid rgba(13, 71, 161, 0.5); /* Darker blue color */
+
+  }
+  100% {
+    border: 0;
+            border-top: 0.5px solid rgba(13, 71, 161, 0.5); /* Darker blue color */
+                        border-bottom: 0.5px solid rgba(13, 71, 161, 0.5); /* Darker blue color */
+
+  }
+}
+
+@keyframes shining {
+  0% {
+    box-shadow: 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: 0 0 20px #2196F3;
+  }
+  100% {
+    box-shadow: 0 0 0 transparent;
+  }
+}
+
+
+#atom {
+  position: relative;
+  width: 40px;
+  height: 10px;
+  /*display: inline-block;*/
+  /*margin: 10px auto;*/
+}
+
+#nucleus,
+.orbit,
+.electron,
+.orbitTrain,
+.electronTrain {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 10px; /* Adjusted size for nucleus, electron, and orbit */
+  height: 10px; /* Adjusted size for nucleus, electron, and orbit */
+  border-radius: 50%;
+  margin: auto;
+}
+
+#nucleus {
+  background: #2196F3;
+  box-shadow: 0 0 7px #2196F3;
+  animation: shining 2s infinite linear;
+}
+
+.orbit:before {
+  content: " ";
+  position: absolute;
+  z-index: -1;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.orbit {
+  width: 40px; /* Adjusted size for orbit */
+  height: 40px; /* Adjusted size for orbit */
+  border: 0;
+  transform-style: preserve-3d;
+  animation: orbitSpecial 1.5s infinite linear;
+
+  .electron {
+    position: relative;
+    top: 18px; /* Adjusted position for electron */
+    width: 5px; /* Adjusted size for electron */
+    height: 5px; /* Adjusted size for electron */
+    background: #FF9800;
+    box-shadow: 0 0 7px #FF9800;
+    border-radius: 50%;
+    transform: translateX(20px);
+    animation: electronAnimation 1.5s infinite linear;
+  }
+}
+
+.orbit:nth-child(4) {
+  transform: rotateY(65deg) rotateX(5deg);
+  animation-delay: -1s;
+
+  .electron {
+    animation-delay: -1s;
+  }
+}
+
+.orbit:nth-child(2) {
+  transform: rotateY(65deg) rotateX(-54deg);
+  animation-delay: -1s;
+  animation-duration: 1s;
+
+  .electron {
+    animation-duration: 1s;
+  }
+}
+
+.orbit:nth-child(3) {
+  transform: rotateY(65deg) rotateX(54deg);
+}
+
