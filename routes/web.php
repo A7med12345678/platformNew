@@ -1,6 +1,5 @@
 <?php
 // git config --global core.autocrlf true
-// 
 
 use App\Http\Controllers\SelectController;
 use Illuminate\Support\Facades\Route;
