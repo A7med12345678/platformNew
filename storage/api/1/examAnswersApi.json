@@ -1,13 +1,11 @@
 {
     "week1sec4": {
-        "num": "5",
-        "time": "10",
-        "1": "a",
-        "2": "b",
+        "num": "3",
+        "time": "98",
+        "1": "a2",
+        "2": "b2",
         "3": "c",
-        "4": "d",
-        "5": "a2",
-        "final_mark": 6
+        "final_mark": 5
     },
     "week40sec4": {
         "num": "1",
@@ -28,11 +26,5 @@
         "1": "d",
         "2": "d2",
         "final_mark": 3
-    },
-    "weekweek1sec4sec4": {
-        "num": "1",
-        "time": "1",
-        "1": null,
-        "final_mark": 0
     }
 }

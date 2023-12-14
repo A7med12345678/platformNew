@@ -29,8 +29,10 @@
                     <!--        <option value="4">Course 4</option>-->
                     <!--    </select>-->
                     <!--</div>-->
-                    <button type="submit" class="btn btn-primary" data-value="pdf">Generate PDF</button>
-                    <button type="submit" class="btn btn-danger" data-value="chart">Generate Chart</button>
+                    <div class="buttons mt-3">
+                        <button type="submit" class="btn btn-primary" data-value="pdf">Generate PDF</button>
+                        <button type="submit" class="btn btn-danger" data-value="chart">Generate Chart</button>    
+                    </div>
                 </form>
 
                 <div class="response">
@@ -66,12 +68,6 @@
 
                     <button type="submit" class="btn btn-primary mt-3">Download</button>
                 </form>
-
-
-                <div id="test">
-                    ss
-                </div>
-
             </div>
 
             <hr class="mt-5 mb-5">

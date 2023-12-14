@@ -1,53 +1,58 @@
 <?php
-namespace App\Http\Controllers;
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\adminChat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class adminChatController extends Controller
+class chatApiController extends Controller
 {
-   
+
     public function index()
     {
         try {
             $msgs = adminChat::latest()->paginate(3);
-            return $msgs;
+            return response()->json(['messages' => $msgs], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'An error occurred while fetching messages'], 500);
         }
     }
-
     public function showAllChats()
     {
         try {
-            $chat = adminChat::orderBy('created_at', 'desc')->get();
-            return view('admin.showAllChats', compact('chat'));
+            $chats = adminChat::orderBy('created_at', 'desc')->get();
+            return response()->json(['chats' => $chats], 200);
         } catch (\Exception $e) {
-            return back()->with('error_msg', 'An error occurred while fetching chat messages');
+            return response()->json(['error' => 'An error occurred while fetching chat messages'], 500);
         }
     }
-    
+
     public function store(Request $request)
     {
         try {
             $input = $request->all();
+
+            // return response()->json(['message' => $input], 200);
+
             $createdChat = adminChat::create([
                 'content' => $input['msg_content'],
                 'sender_id' => Auth::user()->id,
-                'sender_name' =>Auth::user()->name,
+                'sender_name' => Auth::user()->name,
             ]);
 
             if ($createdChat) {
-                return redirect()->route('Admin/showAllChats')->with('flash_msg', 'Message sent!');
+                return response()->json(['message' => 'Message sent!'], 200);
             }
 
-            return back()->with('flash_msg', 'Failed to send message');
+            return response()->json(['error' => 'Failed to send message'], 500);
         } catch (\Exception $e) {
-            return back()->with('flash_msg', 'An error occurred while sending the message');
+            return response()->json(['error' => 'An error occurred while sending the message : ' . $e->getMessage()], 500);
         }
     }
-    
+
     // public function storeShowChat(Request $request)
     // {
     //     try {
@@ -59,14 +64,12 @@ class adminChatController extends Controller
     //         ]);
 
     //         if ($createdChat) {
-    //             return redirect()->route('Admin/showAllChats')->with('flash_msg', 'Message sent!');
+    //             return response()->json(['message' => 'Message sent!'], 200);
     //         }
 
-    //         return back()->with('flash_msg', 'Failed to send message');
+    //         return response()->json(['error' => 'Failed to send message'], 500);
     //     } catch (\Exception $e) {
-    //         return back()->with('flash_msg', 'An error occurred while sending the message');
+    //         return response()->json(['error' => 'An error occurred while sending the message'], 500);
     //     }
     // }
-
-
 }

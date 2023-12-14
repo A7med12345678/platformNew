@@ -24,7 +24,7 @@
         <label for="sort" class="mb-2 mt-4">Filter by :</label>
         <form action="{{ route('admin/courseBuyRequests') }}" method="GET">
 
-            <select name="sort" id="sort" class="form-control" onchange="this.form.submit()">
+            <select name="sort" id="sort" class="form-control class-guest" onchange="this.form.submit()">
                 <!-- all grades -->
                 <optgroup label="Grades">
                     <option value="1" {{ request('sort') === '1' ? ' selected' : '' }}>Grade 1</option>
@@ -78,11 +78,11 @@
                             </a>
                         </td>
                         <td>{{ $request->request_code }}</td>
-                        <td class="p-2">
+                        <td class="p-2" style="width: 100%;">
                             <form action="{{ url('statusCourseRequest/' . $request->student_code . '/' . $request->course) }}" method="POST">
                                 @csrf
                                 @method('POST')
-                                <select name="action" class="form-control" onchange="this.form.submit()">
+                                <select name="action" class="form-control class-guest" onchange="this.form.submit()">
                                     <option value="0" {{ $request->status === '0' ? 'selected' : '' }}>Seen</option>
                                     <option value="1" {{ $request->status === '1' ? 'selected' : '' }}>Pending</option>
                                     <option value="2" {{ $request->status === '2' ? 'selected' : '' }}>Approve</option>
@@ -105,12 +105,12 @@
                         @endif
                         <td>
                             @if($request->status != '2')
-                            <a class="btn btn-success text-center mx-auto" style="font-weight:bold;" target="_blank" href="https://wa.me/+2{{ $request->user_details->whatsapp ?? $request->phone }}?text=%D8%A7%D9%84%D8%B1%D8%AC%D8%A7%D8%A1%20%D8%AA%D8%B3%D8%AF%D9%8A%D8%AF%20%D9%85%D8%A7%20%D8%AA%D8%A8%D9%82%D9%89%20%D9%85%D9%86%20%D9%85%D8%B5%D8%B1%D9%88%D9%81%D8%A7%D8%AA%20%D8%AF%D9%88%D8%B1%D8%A9%20{{ Auth::user()->grade }}%20%D8%AD%D8%AA%D9%89%20%D9%8A%D8%AA%D9%85%20%D8%A5%D8%AA%D8%A7%D8%AD%D8%AA%D9%87%D8%A7%2C%0A%D9%85%D8%B9%20%D8%AA%D8%AD%D9%8A%D8%A7%D8%AA%20%D9%85%D9%86%D8%B5%D8%A9%20{{ $Global_platFormName }}%20..">
+                            <a class="btn btn-success text-center mx-auto class-guest" style="font-weight:bold;" target="_blank" href="https://wa.me/+2{{ $request->user_details->whatsapp ?? $request->phone }}?text=%D8%A7%D9%84%D8%B1%D8%AC%D8%A7%D8%A1%20%D8%AA%D8%B3%D8%AF%D9%8A%D8%AF%20%D9%85%D8%A7%20%D8%AA%D8%A8%D9%82%D9%89%20%D9%85%D9%86%20%D9%85%D8%B5%D8%B1%D9%88%D9%81%D8%A7%D8%AA%20%D8%AF%D9%88%D8%B1%D8%A9%20{{ Auth::user()->grade }}%20%D8%AD%D8%AA%D9%89%20%D9%8A%D8%AA%D9%85%20%D8%A5%D8%AA%D8%A7%D8%AD%D8%AA%D9%87%D8%A7%2C%0A%D9%85%D8%B9%20%D8%AA%D8%AD%D9%8A%D8%A7%D8%AA%20%D9%85%D9%86%D8%B5%D8%A9%20{{ $Global_platFormName }}%20..">
                                 <i class="fab fa-whatsapp"></i>
                                 Notify
                             </a>
                             <br>
-                            <a class="btn btn-primary text-center mx-auto mt-3" href="{{ route('mailCoursePayment', $request->user_details->id ?? $request->email) }}">
+                            <a class="btn btn-primary text-center mx-auto mt-3 class-guest" href="{{ route('mailCoursePayment', $request->user_details->id ?? $request->email) }}">
                                 <i class="fas fa-envelope"></i> Notify
                             </a>
 

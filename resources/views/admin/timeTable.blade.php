@@ -1,54 +1,5 @@
 @extends('layouts.adminApp')
 @section('title', 'Time Table : ' . $Global_platFormName)
-@section('styles')
-    <style>
-        table {
-            text-align: left;
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            vertical-align: top;
-            padding: 0.75rem;
-        }
-
-        td {
-            font-family: 'Caveat Brush', cursive;
-            font-size: 1.2rem;
-            border: 3px solid;
-            min-width: 10rem;
-        }
-
-        td span {
-            background-color: var(--pink);
-        }
-
-        td[data-cell] {
-            height: 10rem;
-        }
-
-        .bg-yellow td span {
-            background-color: var(--yellow);
-        }
-
-        .bg-green td span {
-            background-color: var(--green);
-        }
-
-        thead th {
-            border-right: 3px solid;
-        }
-
-        tbody th {
-            border-top: 3px solid;
-        }
-
-        tbody tr:last-child th {
-            border-bottom: 3px solid;
-        }
-    </style>
-@endsection
 @section('content')
 
 
@@ -158,7 +109,7 @@
                 <form method="POST" action="{{ route('addToTimeTable') }}">
                     @csrf
                     <!-- Laravel CSRF protection token -->
-                    <div class="form-group mt-3">
+                    <div class="form-group mt-3 mb-3">
                         <label for="for_course">Enable for:</label>
                         <select class="form-control" id="for_course" name="for_course">
                             @foreach ($currentGroups as $currentGroup)
@@ -287,7 +238,7 @@
                             });
                         });
                     </script>
-                    <input type="submit" class="btn btn-success" value="Add">
+                    <button type="submit" class="btn btn-success mt-3">Add</button>
 
                 </form>
 

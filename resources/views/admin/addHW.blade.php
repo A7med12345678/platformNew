@@ -59,7 +59,6 @@
                 </div>
             @endif
 
-            <hr>
             <h1 class="mt-5">Add Home Work questions :</h1>
 
             <form method="POST" action="{{ route('admin/uploadExamHW') }}" enctype="multipart/form-data">
@@ -92,7 +91,7 @@
                         accept="image/*" required>
                     <small class="form-text text-muted">Only image files are allowed.</small>
                 </div>
-                <input type="submit" value="Upload" class="btn btn-success mt-4">
+                <button type="submit" class="btn btn-success mt-4">Upload</button>
             </form>
 
 

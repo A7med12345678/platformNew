@@ -92,7 +92,7 @@
                         @endphp
                         <td>{{ basename($pdfFile) }}</td>
                         <td>
-                            <a class="btn btn-danger" href="{{ route('deletePDFFree', basename($pdfFile)) }}">Delete</a>
+                            <a class="btn btn-danger class-guest" href="{{ route('deletePDFFree', basename($pdfFile)) }}">Delete</a>
                         </td>
                         <td>
                             <a href="{{ asset('storage' . $extractedPath) }}" target="_blank"
@@ -118,7 +118,7 @@
                 <label for="file">Select Image : </label> <br>
                 <input type="file" class="form-control-file" name="file" id="file">
             </div>
-            <button type="submit" class="btn btn-primary">Upload</button>
+            <button type="submit" class="btn btn-primary mt-3">Upload</button>
         </form>
 
         <hr class="mt-5 mb-5">
@@ -174,7 +174,7 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-primary">Upload</button>
+            <button type="submit" class="btn btn-primary mt-3">Upload</button>
         </form>
 
         <hr class="mt-5 mb-5">
@@ -197,12 +197,12 @@
                 </select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group mt-3">
                 <label for="content">Update to :</label> <br>
                 <input type="text" class="form-control" id="content" name="content" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Upload</button>
+            <button type="submit" class="btn btn-primary mt-3">Upload</button>
         </form>
 
         <hr class="mt-5 mb-5">

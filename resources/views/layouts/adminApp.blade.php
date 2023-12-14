@@ -1,15 +1,17 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     @include('imports.head')
     <!-- Private : -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    @if (Auth::user()->center_code == '2001')
+    <link href="{{ asset('admin-css/guest.css') }}" rel="stylesheet">
+    @endif
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- <link href="{{ asset('admin-css/adminDot.css') }}" rel="stylesheet">
     <link href="{{ asset('admin-css/dashmin.css') }}" rel="stylesheet"> --}}
     {{-- <link rel="stylesheet" href="{{ asset('mix-css/AdminAll.css') }}"> --}}
-    
+
     <title>@yield('title')</title>
     @yield('styles')
 </head>
@@ -231,7 +233,7 @@
 
     <div class="content">
         <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-            <a href="index.html" class="navbar-brand d-flex d-lg-none me-4"  aria-label="specifc link">
+            <a href="index.html" class="navbar-brand d-flex d-lg-none me-4" aria-label="specifc link">
                 <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
             </a>
             <a href="#" class="sidebar-toggler flex-shrink-0" aria-label="Toggle Sidebar">
@@ -247,7 +249,7 @@
                 </a>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-danger m-3">
+                    <button type="submit" class="btn btn-danger m-3" id="logout">
                         Log Out
                         <i class="fa-solid fa-right-from-bracket"></i>
                     </button>
@@ -281,6 +283,7 @@
     </script>
 
     <!-- Private : -->
+    <script src="{{ asset('admin-js/searchJquery.js') }}"></script>
     <script src="{{ asset('admin-js/searchJquery.js') }}"></script>
     {{-- <script src="{{ asset('mix-js/AdminAll.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script> --}}

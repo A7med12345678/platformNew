@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Models\HonerStudent;
+use App\Models\Exam;
 
 class SelectController extends Controller
 {
@@ -256,6 +257,13 @@ class SelectController extends Controller
         $section = $request->query('section');
         $isValidG = $request->query('isValidG');
         $now = 'week' . $week . 'sec' . $section;
+
+        $okOrNo = exam::where('user_id', Auth::user()->center_code)->pluck($now)->first();
+
+        if($okOrNo !== '#'){
+            // dd($okOrNo);
+            return redirect()->back()->with('flash_msg', 'قمت بالدخول مسبقا');
+        }
 
         // Define the JSON file path based on the type
         $jsonFilePath = storage_path("api" . ($type === 'exam' ? '' : 'HW') . "/{$isValidG[0]}/" . ($type === 'exam' ? 'exam' : 'HW') . "AnswersApi.json");

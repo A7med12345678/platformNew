@@ -14,6 +14,8 @@ class editStudentController extends Controller
     public function showAllData(Request $request)
     {
         $sort = $request->input('sort');
+        $search = $request->input('search');
+
         // Set default query:
         $current_fetch = User::where('role', '<>', 'admin');
 
@@ -156,12 +158,28 @@ class editStudentController extends Controller
                     break;
             }
         }
-        // Fetch all table data:
-        $current = $current_fetch->get();
 
+        // Apply search logic
+        if (isset($search)) {
+            $current_fetch->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('email', 'like', '%' . $search . '%')
+                    ->orWhere('phone', 'like', '%' . $search . '%')
+                    ->orWhere('parent_phone', 'like', '%' . $search . '%')
+                    ->orWhere('whatsapp', 'like', '%' . $search . '%')
+                ;
+            });
+        }
+
+        // Paginate the results
+        $current = $current_fetch->paginate(2);
+        $currentCount = $current->total(); // total count for pagination
+
+        // Fetch all table data:
+        // $current = $current_fetch->get();
 
         $currentCount = $current_fetch->count();
-        return view('admin.showAllData', compact('current', 'currentCount'));
+        return view('admin.showAllData', compact('current', 'sort', 'currentCount'));
     }
 
 

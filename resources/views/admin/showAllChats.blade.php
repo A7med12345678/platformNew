@@ -27,15 +27,10 @@
         <div class="">
             <form id="admin-form" method="POST" action="{{ route('Chat.store') }}">
                 @csrf
-
-                <input type="text" class="form-control" name="sender_id" value="{{ Auth::user()->id }}" hidden>
-
-                <input type="text" class="form-control" name="sender_name" value="{{ Auth::user()->name }}" hidden>
-
                 <div class="form-group">
                     <input type="text" class="form-control" name="msg_content">
                 </div>
-                <input type="submit" class="btn btn-primary mt-2" value="Send">
+                <button type="submit" class="btn btn-primary mt-2">Send</button>
             </form>
         </div>
     </div>

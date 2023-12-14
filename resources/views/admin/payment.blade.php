@@ -242,7 +242,7 @@
                         <select class="form-control" id="section-selector" name="disable_grade">
                             @include('components.gradeChoose')
                         </select>
-                        <input type="submit" value="Display" class="btn btn-danger mt-3">
+                        <button type="submit" class="btn btn-danger mt-3">Display</button>
                     </form>
 
                     {{-- <hr class="w-50 text-center mx-auto mt-5"> --}}
@@ -250,7 +250,7 @@
 
                     <form action="{{ route('admin/disableAllGrades') }}" method="POST" class="mx-auto text-center">
                         @csrf
-                        <input type="submit" class="btn btn-danger" value="Display All Grades">
+                        <button type="submit" class="btn btn-danger">Display All Grades</button>
                     </form>
 
                 </div>

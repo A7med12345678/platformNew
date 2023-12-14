@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="form-group mt-3">
     {{-- <label>Select Report Type:</label> --}}
     <div class="form-check">
         <input type="radio" id="exam" name="report_type" value="exam" class="form-check-input" required>

@@ -32,7 +32,7 @@
 
                 @include('components.examOrHw')
 
-                <label for="orno" class="mb-2">Enable once :</label>
+                <label for="orno" class="mb-2 mt-2">Enable once :</label>
                 <div class="form-group" id="orno">
                     {{-- <label>Select Report Type:</label> --}}
                     <div class="form-check">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary mb-2">Enable</button>
+                <button type="submit" class="btn btn-primary mb-2 mt-3">Enable</button>
             </form>
 
             <script></script>

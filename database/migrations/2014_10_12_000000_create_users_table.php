@@ -38,7 +38,7 @@ return new class extends Migration {
             $table->rememberToken();
             $table->timestamp('email_verified_at')->nullable();
             $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo', 2048)->default('default.webp');
+            $table->string('profile_photo', 2048)->nullable();
             $table->string('session_id')->nullable();
             $table->string('develop_mode')->default('0');
 
