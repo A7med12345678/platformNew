@@ -292,7 +292,7 @@
                                 @forelse ($current as $item)
                                     <tr>
 
-                                        <td class="p-2">
+                                        <td class="p-3">
 
                                             @if ($item->deleted_at != null)
                                                 <span class="text-danger">Student Already Deleted !</span>
@@ -302,7 +302,13 @@
                                                             Auth::user()->center_code === '2001' ||
                                                             Auth::user()->center_code === '3001')
                                                         <div class="">
-                                                            <form method="POST"
+                                                            <a href="{{ route('admin/destroyStudent', $item->center_code) }}"
+                                                                title="delete Student"
+                                                                onsubmit="return confirm('Are you sure you want to delete this student?');">
+                                                                Delete
+                                                            </a>
+
+                                                            {{-- <form method="POST"
                                                                 action="{{ route('admin/destroyStudent', $item->center_code) }}"
                                                                 accept-charset="UTF-8" style="display:inline"
                                                                 onsubmit="return confirm('Are you sure you want to delete this student?');">
@@ -310,7 +316,7 @@
                                                                 @method('GET')
                                                                 <button type="submit" class="btn btn-danger pl-2 pr-2"
                                                                     title="Delete Student">Delete</button>
-                                                            </form>
+                                                            </form> --}}
                                                         </div>
                                                         <br>
                                                     @endif
@@ -326,7 +332,18 @@
                                                 </div>
 
                                                 <div class="text-center mt-4">
-                                                    <form method="POST" action="{{ route('admin/forceStopManager') }}"
+
+                                                    <a href="{{ route('admin/forceStopManager', $item->center_code) }}"
+                                                        title="Edit Student">
+                                                        <button class="btn btn-warning">
+                                                            @if ($item->force_stop === '1')
+                                                                <span style="font-size:smaller;">Un-Ban</span>
+                                                            @else
+                                                                Ban
+                                                            @endif
+                                                        </button>
+                                                    </a>
+                                                    {{-- <form method="POST" action="{{ route('admin/forceStopManager') }}"
                                                         onsubmit="return confirm('Are you sure you want to Ban / Un-Ban this student?');">
                                                         @csrf
                                                         <input type="hidden" name="id"
@@ -338,11 +355,22 @@
                                                                 Ban
                                                             @endif
                                                         </button>
-                                                    </form>
+                                                    </form> --}}
                                                 </div>
 
                                                 <div class="text-center mt-4">
-                                                    <form method="POST" action="{{ route('admin/activationStopManager') }}"
+
+                                                    <a href="{{ route('admin/activationManager', $item->center_code) }}"
+                                                        title="activate Student">
+                                                        <button class="btn btn-success">
+                                                            @if ($item->pay === '1')
+                                                                <span style="font-size:10px;">De-Active</span>
+                                                            @else
+                                                                Activate
+                                                            @endif
+                                                        </button>
+                                                    </a>
+                                                    {{-- <form method="POST" action="{{ route('admin/activationManager') }}"
                                                         onsubmit="return confirm('Are you sure you want to Active / De-activate this student?');">
                                                         @csrf
                                                         <input type="hidden" name="id"
@@ -354,7 +382,7 @@
                                                                 Activate
                                                             @endif
                                                         </button>
-                                                    </form>
+                                                    </form> --}}
                                                 </div>
 
                                                 @if (Auth::user()->center_code !== '1001' &&
@@ -364,7 +392,19 @@
                                                         <div class="text-danger text-center">Permission Denied !</div>
                                                     @else
                                                         <div class="">
-                                                            <form method="POST"
+
+                                                            <a href="{{ route('admin/destroyStudent', $item->center_code) }}"
+                                                                title="delete Student">
+                                                                <button class="btn btn-success">
+                                                                    @if ($item->pay === '1')
+                                                                        <span style="font-size:10px;">De-Active</span>
+                                                                    @else
+                                                                        Activate
+                                                                    @endif
+                                                                </button>
+                                                            </a>
+
+                                                            {{-- <form method="POST"
                                                                 action="{{ route('admin/destroyStudent', $item->center_code) }}"
                                                                 accept-charset="UTF-8" style="display:inline"
                                                                 onsubmit="return confirm('Are you sure you want to delete this student?');">
@@ -372,7 +412,9 @@
                                                                 @method('DELETE')
                                                                 <button type="submit" class="btn btn-danger pl-2 pr-2"
                                                                     title="Delete Student">Delete</button>
-                                                            </form>
+                                                            </form> --}}
+
+
                                                         </div>
                                                         <br>
                     </div>
@@ -388,7 +430,7 @@
                             <img src="{{ asset('storage/profiles/' . $item->profile_photo) }}" alt="" width="100"
                                 height="100" class="rounded-circle">
                         @else
-                            <img src="{{ asset('welcome/images/null.webp') }}" alt="no repsonse logo" width="100"
+                            <img src="{{ asset('welcome/images/null.webp') }}" alt="no user profile photo" width="100"
                                 height="100">
                         @endif
                     </td>

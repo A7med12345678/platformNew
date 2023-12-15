@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\toDoApiController;
 use App\Http\Controllers\Api\examAddApiController;
 use App\Http\Controllers\Api\complainApiController;
 use App\Http\Controllers\Api\courseBuyApiController;
+use App\Http\Controllers\Api\editStudentApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -51,8 +52,17 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/buy/storeStudent/{id}', [courseBuyApiController::class, 'requestCourse']);
     Route::get('/buy/destroyStudent/{id}', [courseBuyApiController::class, 'deleteRequestCourse']);
 
-    
-    
-    
+
+    Route::get('/admin/showAllStudents', [editStudentApiController::class, 'showAllData']);
+    Route::get('/admin/editStudent/{id}', [editStudentApiController::class, 'editStudentPage']);
+    Route::post('/admin/updateStudent/{id}', [editStudentApiController::class, 'updateStudent']);
+    Route::get('/admin/destroyStudent/{id}', [editStudentApiController::class, 'destroyStudent']);
+    Route::get('/admin/forceStopManager/{id}', [editStudentApiController::class, 'forceStopManager']);
+    Route::get('/admin/activationManager/{id}', [editStudentApiController::class, 'activationManager']);
+
+
+
+
+
     Route::post('/logout', [AuthApiController::class, 'logout']);
 });

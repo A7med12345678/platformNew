@@ -27,8 +27,8 @@ Route::resource("/toDo", toDoController::class);
 Route::get('admin/editStudentPage/{id}', [editStudentController::class, 'editStudentPage'])->name('admin/editStudentPage');
 Route::post('admin/updateStudent/{id}', [editStudentController::class, 'updateStudent'])->name('admin/updateStudent');
 Route::get('admin/destroyStudent/{id}', [editStudentController::class, 'destroyStudent'])->name('admin/destroyStudent');
-Route::post('admin/forceStopManager', [editStudentController::class, 'forceStopManager'])->name('admin/forceStopManager');
-Route::post('admin/activationStopManager', [editStudentController::class, 'activationStopManager'])->name('admin/activationStopManager');
+Route::get('admin/forceStopManager/{id}', [editStudentController::class, 'forceStopManager'])->name('admin/forceStopManager');
+Route::get('admin/activationManager/{id}', [editStudentController::class, 'activationManager'])->name('admin/activationManager');
 
 // activation : 
 Route::post('admin/studentSearch', [activationController::class, 'studentSearch'])->name('admin/studentSearch');

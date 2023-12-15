@@ -37,10 +37,11 @@
             </div>
         @endif
 
-        <form action="{{ route('admin/updateStudent', $user->id) }}" method="post">
+        <form action="{{ route('admin/updateStudent', $user->center_code) }}" method="post">
             {!! csrf_field() !!}
             @method('post')
             <div class="form-group mt-3">
+                {{-- {{$user->id}} --}}
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name" value="{{ $user->name }}" class="form-control">
             </div>
@@ -65,14 +66,14 @@
                 <input type="text" name="grade" id="grade" value="{{ $user->grade }}" class="form-control">
             </div>
 
-            <div class="form-group mt-3">
+            {{-- <div class="form-group mt-3">
                 <label for="grade-selector">Enable for:</label>
                 <select class="form-control" id="grade-selector" name="grade">
                     <option value="1" {{ $user->grade == 1 ? 'selected' : '' }}>1 Sec.</option>
                     <option value="2" {{ $user->grade == 2 ? 'selected' : '' }}>2 Sec.</option>
                     <option value="3" {{ $user->grade == 3 ? 'selected' : '' }}>3 Sec.</option>
                 </select>
-            </div>
+            </div> --}}
 
             <div class="form-group mt-3">
                 <label for="center_code">Code</label>

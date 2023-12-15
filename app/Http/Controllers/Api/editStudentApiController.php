@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\homework;
-use App\Models\exam;
+use App\Models\Exam;
 
-
-class editStudentController extends Controller
+class editStudentApiController extends Controller
 {
 
     public function showAllData(Request $request)
@@ -18,6 +18,7 @@ class editStudentController extends Controller
 
         // Set default query:
         $current_fetch = User::where('role', '<>', 'admin');
+
 
         if (isset($sort)) {
             switch ($sort) {
@@ -166,8 +167,7 @@ class editStudentController extends Controller
                     ->orWhere('email', 'like', '%' . $search . '%')
                     ->orWhere('phone', 'like', '%' . $search . '%')
                     ->orWhere('parent_phone', 'like', '%' . $search . '%')
-                    ->orWhere('whatsapp', 'like', '%' . $search . '%')
-                ;
+                    ->orWhere('whatsapp', 'like', '%' . $search . '%');
             });
         }
 
@@ -175,13 +175,16 @@ class editStudentController extends Controller
         $current = $current_fetch->paginate(2);
         $currentCount = $current->total(); // total count for pagination
 
-        // Fetch all table data:
-        // $current = $current_fetch->get();
+        // Prepare the response data
+        $responseData = [
+            'current' => $current,
+            'sort' => $sort,
+            'currentCount' => $currentCount,
+        ];
 
-        $currentCount = $current_fetch->count();
-        return view('admin.showAllData', compact('current', 'sort', 'currentCount'));
+        // Return the response as JSON
+        return response()->json($responseData);
     }
-
 
     //  ------------ student manager (edit page) : ------------
 
@@ -190,22 +193,11 @@ class editStudentController extends Controller
         $user = User::where('center_code', $center_code)->first();
 
         if (!$user) {
-            return back()->with('flash_msg', 'Student not found');
+            return response()->json(['error' => 'Student not found'], 404);
         }
 
-        return view('admin.editStudent')->with('user', $user);
+        return response()->json(['user' => $user], 200);
     }
-
-    // public function edit(string $center_code)
-    // {
-    //     $user = User::where('center_code', $center_code)->first();
-
-    //     if (!$user) {
-    //         return back()->with('flash_msg', 'Student not found');
-    //     }
-
-    //     return view('admin.editStudent')->with('user', $user);
-    // }
 
     //  -------------- student manager (update)  : -----------------
 
@@ -214,68 +206,64 @@ class editStudentController extends Controller
         try {
             $student = User::where('center_code', $center_code)->first();
 
-            if ($student) {
-                $input = $request->all();
-
-                // Get the original values before updating
-                $originalName = $student->name;
-                $originalGrade = $student->grade;
-
-                // Check if name or grade is being modified
-                $nameChanged = $originalName !== $input['name'];
-                $gradeChanged = $originalGrade !== $input['grade'];
-
-                // Update exam table if necessary
-                if ($nameChanged || $gradeChanged) {
-                    // exam::where('user_id', $student->center_code)->update([
-                    //     'user_name' => $input['name'],
-                    //     'user_grade' => $input['grade']
-                    // ]);
-                    homework::where('user_id', $student->center_code)->update([
-                        'user_name' => $input['name'],
-                        'user_grade' => $input['grade']
-                    ]);
-                }
-
-                if ($nameChanged || $gradeChanged) {
-                    exam::where('user_id', $student->center_code)->update([
-                        'user_name' => $input['name'],
-                        'user_grade' => $input['grade']
-                    ]);
-                    // homework::where('user_id', $student->center_code)->update([
-                    //     'user_name' => $input['name'],
-                    //     'user_grade' => $input['grade']
-                    // ]);
-                }
-
-                // Update the user's information
-                $student->update($input);
-
-                return redirect('adminDashboard')->with('flash_msg', 'Student updated!');
+            if (!$student) {
+                return response()->json(['error' => 'Student not found'], 404);
             }
 
-            // If user is not found
-            return back()->with('flash_msg', 'Student not found');
+            $input = $request->all();
+
+            // Get the original values before updating
+            $originalName = $student->name;
+            $originalGrade = $student->grade;
+
+            // Check if name or grade is being modified
+            $nameChanged = $originalName !== $input['name'];
+            $gradeChanged = $originalGrade !== $input['grade'];
+
+            // Update exam table if necessary
+            if ($nameChanged || $gradeChanged) {
+                homework::where('user_id', $student->center_code)->update([
+                    'user_name' => $input['name'],
+                    'user_grade' => $input['grade']
+                ]);
+            }
+
+            if ($nameChanged || $gradeChanged) {
+                exam::where('user_id', $student->center_code)->update([
+                    'user_name' => $input['name'],
+                    'user_grade' => $input['grade']
+                ]);
+            }
+
+            // Update the user's information
+            $student->update($input);
+
+            return response()->json(['message' => 'Student updated'], 200);
         } catch (\Exception $e) {
             // Handle exceptions
-            return redirect('adminDashboard')->with('flash_msg', 'Failed to update student: ' . $e->getMessage());
+            return response()->json(['error' => 'Failed to update student: ' . $e->getMessage()], 500);
         }
     }
-
 
     //  ------------ student manager (delete) : ------------
 
     public function destroyStudent(string $center_code)
     {
-        // Delete the user and associated exam records
-        $deletedCount = User::where('center_code', $center_code)->delete();
-        $deletedCountExam = Exam::where('user_id', $center_code)->delete();
-        $deletedCountHomework = Homework::where('user_id', $center_code)->delete();
+        try {
+            // Delete the user and associated exam records
+            $deletedCount = User::where('center_code', $center_code)->delete();
+            $deletedCountExam = Exam::where('user_id', $center_code)->delete();
+            $deletedCountHomework = Homework::where('user_id', $center_code)->delete();
 
-        if ($deletedCount > 0 and $deletedCountExam > 0 and $deletedCountHomework > 0) {
-            return response()->json(['message' => 'Student and associated exam records deleted'], 200);
+            if ($deletedCount > 0 and $deletedCountExam > 0 and $deletedCountHomework > 0) {
+                return response()->json(['message' => 'Student and associated exam records deleted'], 200);
+            }
+
+            return response()->json(['error' => 'Student not found'], 404);
+        } catch (\Exception $e) {
+            // Handle exceptions
+            return response()->json(['error' => 'Failed to delete student: ' . $e->getMessage()], 500);
         }
-        return back()->with('flash_msg', 'Student not found');
     }
 
     //  ------------ student manager (ban function) : ---------
@@ -284,7 +272,7 @@ class editStudentController extends Controller
     {
         try {
 
-            $user = User::where('center_code', $center_code)->first(); // Use first() to get a single user
+            $user = User::where('center_code', $center_code)->first();
 
             $updated = false;
 
@@ -299,13 +287,16 @@ class editStudentController extends Controller
             }
 
             if ($updated) {
-                return redirect()->back()->with('flash_msg', 'Student status Updated!');
+                // Return a JSON response for API
+                return response()->json(['message' => 'Student status updated'], 200);
             } else {
-                return redirect()->back()->with('flash_msg', 'Failed to update force stop status');
+                // Return a JSON response for API
+                return response()->json(['error' => 'Failed to update force stop status'], 500);
             }
         } catch (\Exception $e) {
             // Handle any exceptions that occur during the update
-            return redirect()->back()->with('flash_msg', 'An error occurred: ' . $e->getMessage());
+            // Return a JSON response for API
+            return response()->json(['error' => 'An error occurred: ' . $e->getMessage()], 500);
         }
     }
 
@@ -313,33 +304,38 @@ class editStudentController extends Controller
 
     public function activationManager(string $center_code)
     {
+        try {
 
-        $user = User::where('center_code', $center_code)->first(); // Use first() to get a single user
+            $user = User::where('center_code', $center_code)->first();
 
-        $updated = false; // Initialize $updated outside of the if-else blocks
+            $updated = false;
 
-        if ($user) {
-            try {
+            if ($user) {
                 if ($user->pay === "1") {
                     $user->pay = "0";
-                    $updated = $user->save(); // Update the user's properties
+                    $updated = $user->save();
                 } elseif ($user->pay === "0") {
                     $user->pay = "1";
-                    $updated = $user->save(); // Update the user's properties
+                    $updated = $user->save();
                 }
 
                 if ($updated) {
-                    return redirect()->back()->with('flash_msg', 'Student status Updated!');
+                    // Return a JSON response for API
+                    return response()->json(['message' => 'Student status updated'], 200);
                 } else {
-                    return redirect()->back()->with('flash_msg', 'Failed to update activation status.');
+                    // Return a JSON response for API
+                    return response()->json(['error' => 'Failed to update activation status'], 500);
                 }
-            } catch (\Exception $e) {
-                // Handle any exceptions that occur during the update
-                return redirect()->back()->with('flash_msg', 'An error occurred: ' . $e->getMessage());
+            } else {
+                // Return a JSON response for API
+                return response()->json(['error' => 'User not found'], 404);
             }
-        } else {
-            return redirect()->back()->with('flash_msg', 'User not found.');
+        } catch (\Exception $e) {
+            // Handle any exceptions that occur during the update
+            // Return a JSON response for API
+            return response()->json(['error' => 'An error occurred: ' . $e->getMessage()], 500);
         }
     }
-
 }
+
+
