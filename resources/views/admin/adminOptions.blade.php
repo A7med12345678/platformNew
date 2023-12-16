@@ -216,8 +216,8 @@
                     <div class="chat">
                         @isset($chat)
                             @foreach ($chat as $item)
-                                <div
-                                    class="message {{ $item->sender_id === Auth::user()->id ? 'message-right' : 'message-left' }}">
+                            <div class="message {{ (isset(Auth::user()->id) && $item->sender_id === Auth::user()->id) ? 'message-right' : 'message-left' }}">
+
                                     <div class="message-sender">{{ $item->sender_name }}</div>
                                     <div class="message-meta">{{ $item->created_at }}</div>
                                     <div class="message-content font-weight-bold">{{ $item->content }}</div>

@@ -1,12 +1,14 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     @include('imports.head')
     <!-- Private : -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    @if (Auth::user()->center_code == '2001')
-    <link href="{{ asset('admin-css/guest.css') }}" rel="stylesheet">
+    @if (isset(Auth::user()->center_code) && Auth::user()->center_code == '2001')
+        <link href="{{ asset('admin-css/guest.css') }}" rel="stylesheet">
     @endif
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- <link href="{{ asset('admin-css/adminDot.css') }}" rel="stylesheet">
     <link href="{{ asset('admin-css/dashmin.css') }}" rel="stylesheet"> --}}
@@ -44,13 +46,15 @@
             <div class="d-flex align-items-center ms-4 mb-4">
                 <div class="position-relative">
 
-                    <img class="rounded-circle" src="{{ asset('storage/profiles/' . Auth::user()->profile_photo) }}"
-                        alt="{{ Auth::user()->name }}'s Profile Photo" style="width: 40px; height: 40px;">
-
-                    @if (Auth::user()->center_code == '1000' or
-                            Auth::user()->center_code == '1001' or
-                            Auth::user()->center_code == '2000' or
-                            Auth::user()->center_code == '3000')
+                    @if (isset(Auth::user()->profile_photo))
+                        <img class="rounded-circle" src="{{ asset('storage/profiles/' . Auth::user()->profile_photo) }}"
+                            alt="{{ Auth::user()->name }}'s Profile Photo" style="width: 40px; height: 40px;">
+                    @endif
+                    @if (isset(Auth::user()->center_code) &&
+                            (Auth::user()->center_code == '1000' ||
+                                Auth::user()->center_code == '1001' ||
+                                Auth::user()->center_code == '2000' ||
+                                Auth::user()->center_code == '3000'))
                         <div class="bg-danger rounded-circle border border-2 border-white position-absolute end-0 bottom-0"
                             style="padding:0.35rem;">
                         </div>
@@ -67,7 +71,10 @@
                         @endisset
                     </div>
                     <div style="font-weight: bold;">
-                        {{ Auth::user()->role }}
+                        @isset(Auth::user()->role)
+                            {{ Auth::user()->role }}
+                        @endisset
+
                     </div>
                     {{-- <div class="mt-2">
                         <a href="{{ route('admin/editStudentPage', Auth::user()->center_code) }}"
@@ -242,11 +249,13 @@
 
 
             <div class="navbar-nav align-items-center ms-auto">
-                <a href="{{ route('admin/editStudentPage', Auth::user()->center_code) }}"
+
+                <a href="{{ isset(Auth::user()->center_code) ? route('admin/editStudentPage', Auth::user()->center_code) : '#' }}"
                     class="btn btn-secondary text-white">
                     Edit Profile
                     <i class="fa-regular fa-user"></i>
                 </a>
+
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="btn btn-danger m-3" id="logout">
