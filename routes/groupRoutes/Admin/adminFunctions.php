@@ -55,6 +55,9 @@ Route::post('admin/HWShow/Questions', [QuizController::class, 'showHWPhoto'])->n
 Route::post('disableExam', [QuizController::class, 'disableExam'])->name('disableExam');
 Route::post('disableHW', [QuizController::class, 'disableHW'])->name('disableHW');
 
+Route::post('updateAssigmentAccess', [QuizController::class, 'updateAssigmentAccess'])->name('updateAssigmentAccess');
+
+
 // enable assesment again :
 Route::post('quiz/enable-exam', [QuizController::class, 'enableExam'])->name('quiz/enable-exam');
 Route::post('quiz/enable-HW', [QuizController::class, 'enableHW'])->name('quiz/enable-HW');

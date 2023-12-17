@@ -86,6 +86,24 @@
 
         </div>
 
+        <hr>
+
+
+        <div class="access">
+            <div class="h3 mt-5 mb-3 text-primary">Exam Accessing :</div>
+
+            <form method="post" action="{{ route('updateAssigmentAccess') }}" class="mt-3">
+                @csrf
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="comment" name="comment" value="1">
+                    <label class="form-check-label" for="comment">change Access</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-2">Submit</button>
+            </form>
+
+        </div>
+
     </div>
 
 @endsection

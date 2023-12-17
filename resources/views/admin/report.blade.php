@@ -1,6 +1,8 @@
 @extends('layouts.adminApp')
 @section('title', 'Report Exam : ' . $Global_platFormName)
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Content Start -->
     <div class="p-3">
         <div class="container">
@@ -14,6 +16,7 @@
                 <div class="h3 mt-5 mb-3 text-primary">Report By (ID) :</div>
 
                 <form id="upload-form">
+                    @method('POST')
                     <div class="form-group">
                         <input type="text" class="form-control" id="id1" name="id1" placeholder="Enter ID">
                     </div>
@@ -31,13 +34,13 @@
                     <!--</div>-->
                     <div class="buttons mt-3">
                         <button type="submit" class="btn btn-primary" data-value="pdf">Generate PDF</button>
-                        <button type="submit" class="btn btn-danger" data-value="chart">Generate Chart</button>    
+                        <button type="submit" class="btn btn-danger" data-value="chart">Generate Chart</button>
                     </div>
                 </form>
-
+                {{-- 
                 <div class="response">
                     @include('components.reportMsg')
-                </div>
+                </div> --}}
 
             </div>
 
@@ -203,6 +206,7 @@
 @endsection
 
 @section('js')
+
     {{-- route variables :  --}}
     <script>
         var singleStudent = "{{ route('singleStudent') }}";;
@@ -230,5 +234,6 @@
     <script src="{{ asset('jquery/reports/reportAll.js') }}"></script>
     <script src="{{ asset('jquery/reports/reportStatistics.js') }}"></script>
     <script src="{{ asset('admin-js/scrollBestStudent.js') }}"></script>
+<!-- jQuery CDN -->
 
 @endsection

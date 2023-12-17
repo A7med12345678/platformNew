@@ -41,7 +41,7 @@
     });
 </script> --}}
 
-
+{{-- 
 <script>
     var script1 = document.createElement('script');
     script1.onload = function() {
@@ -58,7 +58,9 @@
     // };
     // script2.src = 'https://kit.fontawesome.com/2b6685be60.js';
     // document.head.appendChild(script2);
-</script>
+</script> --}}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 
 <link rel="preconnect" href="https://kit.fontawesome.com">
 <link rel="preload" as="script" href="https://kit.fontawesome.com/2b6685be60.js" crossorigin="anonymous">

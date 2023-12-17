@@ -259,8 +259,7 @@ class SelectController extends Controller
         $now = 'week' . $week . 'sec' . $section;
 
         $okOrNo = exam::where('user_id', Auth::user()->center_code)->pluck($now)->first();
-
-        if($okOrNo !== '#'){
+        if ($okOrNo !== '#') {
             // dd($okOrNo);
             return redirect()->back()->with('flash_msg', 'قمت بالدخول مسبقا');
         }

@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\exam;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 
 use Illuminate\Support\Facades\Auth;
@@ -356,5 +357,52 @@ class QuizController extends Controller
             return redirect()->back()->with('flash_msg', "Failed to disable $reportName. Please try again.");
         }
     }
+
+
+    // ---------------------------- access exam seondly : -------------------------
+
+
+    public function updateAssigmentAccess(Request $request)
+    {
+        // Set the file path
+        $filePath = base_path('app/Http/Controllers/SelectController.php');
+
+        // Start and end line numbers for the range to be commented/uncommented
+        $startLineNumber = 261;
+        $endLineNumber = 265;
+
+        try {
+            // Read the content of the file into an array
+            $lines = file($filePath, FILE_IGNORE_NEW_LINES);
+
+            // Make sure the line numbers are within the range of the file
+            if ($startLineNumber > 0 && $endLineNumber <= count($lines) && $startLineNumber <= $endLineNumber) {
+                // Adjust the line numbers to match array indexing
+                $startIndex = $startLineNumber - 1;
+                $endIndex = $endLineNumber - 1;
+
+                // Loop through the range of lines and toggle the comment status
+                for ($i = $startIndex; $i <= $endIndex; $i++) {
+                    // Check if the line is already commented or uncommented
+                    $isCommented = strpos($lines[$i], '//') !== false;
+
+                    // Toggle the comment status for the line
+                    $lines[$i] = $isCommented ? ltrim($lines[$i], "/") : "//" . rtrim($lines[$i]);
+                }
+
+                // Write the modified content back to the file
+                file_put_contents($filePath, implode(PHP_EOL, $lines));
+
+                return back()->with('flash_msg', "Exam can be accessing status changed!");
+            } else {
+                throw new \Exception('Invalid line numbers.');
+            }
+        } catch (\Exception $e) {
+            // Handle the exception
+            return back()->with('flash_msg', $e->getMessage());
+        }
+    }
+
+
 
 }

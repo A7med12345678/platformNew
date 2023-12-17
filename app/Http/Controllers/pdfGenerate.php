@@ -134,7 +134,9 @@ class pdfGenerate extends Controller
 
                 // Return a success message and the file path to the form view
                 $message = users::where('center_code', $id)->pluck('parent_phone')->first();
-                return back()->with('message', $message)->with('downloadLink', $filename);
+                // return back()->with('message', $message)->with('downloadLink', $filename);
+                return view('admin.reportResponse', compact('filename' , 'message'));
+
             } else {
                 // Marks not found for the student. Return an error message.
                 $errorMessage = 'Student marks not found.';

@@ -62,6 +62,14 @@ $(document).ready(function () {
 
         // Append the form to the body and submit it
         document.body.appendChild(hiddenForm);
+
+        // Before hiddenForm.submit(), log important values
+        // console.log('Route:', route);
+        // console.log('CSRF Token:', csrfToken);
+        // console.log('ID Value:', $("input[name='id1']").val());
+        // console.log('Report Type:', reportType);
+
+
         hiddenForm.submit();
     });
 });
